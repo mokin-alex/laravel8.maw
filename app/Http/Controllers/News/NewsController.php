@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\News;
 
+use App\Http\Controllers\Controller;
 use App\Models\News;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+    //Основной Новостной контроллер
     public function index() {
         return view('news.news')->with('rubric', News::getCategory());
     }
@@ -17,7 +19,7 @@ class NewsController extends Controller
 
     public function showByCategory($cat_id) {
         //return view('news.newsByCategory')->with('news', News::getNewsByCategory($cat_id));
-        //Пусть будет и список новостей и наименование рубрики:
+        //Пусть будет и список новостей и наименование рубрики на русском:
         return view('news.newsByCategory',['news' => News::getNewsByCategory($cat_id), 'rubric' => News::getCategoryText($cat_id)]);
     }
 

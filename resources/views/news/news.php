@@ -5,7 +5,7 @@ include resource_path() . "/views/widgets/menu.php";
 
 <?php foreach ($rubric as $item): ?>
 
-<h3><a href="<?=route('byCategory', $item['rubric']) ?>"><?= $item['text'] ?></a></h3>
+<h3><a href="<?=route('news.byCategory', $item['rubric']) ?>"><?= $item['text'] ?></a></h3>
 
 <?php  endforeach; ?>
 
