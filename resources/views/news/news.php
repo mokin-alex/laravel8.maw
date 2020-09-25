@@ -1,6 +1,12 @@
 <?php
 include resource_path() . "/views/widgets/menu.php";
 ?>
-<h2>Новости</h2>
+<h2>Все новости по рубрикам</h2>
 
-<h3>Выбирайте категорию!</h3>
+<?php foreach ($rubric as $item): ?>
+
+<h3><a href="/news/rubric/<?= $item['rubric'] ?>"><?= $item['text'] ?></a></h3>
+
+<?php  endforeach; ?>
+
+

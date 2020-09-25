@@ -43,5 +43,5 @@ Route::name('news.')
 
 Route::get('/news', [NewsController::class, 'index'])->name('news');
 Route::get('/newsOne/{id}', [NewsController::class, 'show'])->name('newsOne');
-Route::get('/news/category/{cat_id}',[NewsController::class, 'showByCategory'])->name('byCategory');
+Route::get('/news/rubric/{cat_id}',[NewsController::class, 'showByCategory'])->name('byCategory');
 
