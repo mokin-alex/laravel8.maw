@@ -6,7 +6,7 @@ include resource_path() . "/views/widgets/menu.php";
 
 <?php foreach ($news as $item): ?>
 
-    <h3><a href="/newsOne/<?= $item['id'] ?>"><?= $item['title'] ?></a></h3>
+    <h3><a href="<?=route('newsOne', $item['id']) ?>"><?= $item['title'] ?></a></h3>
 
 <?php  endforeach; ?>
 
