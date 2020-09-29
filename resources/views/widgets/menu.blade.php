@@ -1,6 +1,10 @@
-<a href="{{route('index')}}">Главная</a>
-<a href="{{route('news.')}}">Новости</a>
-<a href="{{route('admin.index')}}">Админка</a>
-<a href="{{route('about')}}">О нас</a>
-<a href="{{ route('vue') }}">Vue</a>
-<br>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('news.') }}">{{ __('Новости') }}</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('about') }}">{{ __('О нас') }}</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('vue') }}">{{ __('Vue') }}</a>
+</li>
+

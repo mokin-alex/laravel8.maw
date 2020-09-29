@@ -28,8 +28,8 @@ Route::name('admin.')
     ->group(
         function () {
             Route::get('/', [IndexController::class, 'index'])->name('index');
-            Route::get('/test1', [IndexController::class, 'test1'])->name('test1');
-            Route::get('/test2', [IndexController::class, 'test2'])->name('test2');
+            Route::get('/addrubric', [IndexController::class, 'addCategory'])->name('addCategory');
+            Route::get('/addnews', [IndexController::class, 'addNews'])->name('addNews');
         }
     );
 

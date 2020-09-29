@@ -1,0 +1,11 @@
+.card-body_link {
+    color: #c04d5e;
+}
+.card-body_link:hover {
+    text-decoration: none;
+    color: #7274c4;
+}
+
+.navbar-brand {
+    color: #c04d5e;
+}

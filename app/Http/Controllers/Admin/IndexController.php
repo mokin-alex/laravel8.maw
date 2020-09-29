@@ -11,11 +11,11 @@ class IndexController extends Controller
         return view('admin.index');
     }
 
-    public function test1() {
-        return view('admin.test1');
+    public function addCategory() {
+        return view('admin.addRubric');
     }
 
-    public function test2() {
-        return view('admin.test2');
+    public function addNews() {
+        return view('admin.addNews');
     }
 }

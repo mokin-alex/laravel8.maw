@@ -1,11 +1,22 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
-@section('title', 'Административная панель')
+@section('title', 'Administer')
 
 @section('menu')
     @include('widgets.menuAdmin')
 @endsection
 
 @section('content')
-    <h2>АДМИНКА</h2>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Административная панель') }}</div>
+                    <div class="card-body">
+                        {{ __('Добавьте новсть или новостную рубрику!') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

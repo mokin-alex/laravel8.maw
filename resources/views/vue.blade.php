@@ -1,6 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
-@section('title', 'Vue-demo')
+@section('title', 'VUE DEMO')
 
 @section('menu')
     @include('widgets.menu')

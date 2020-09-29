@@ -1,4 +1,11 @@
-<a href="{{route('index')}}">Главная</a>
-<a href="{{route('admin.test1')}}">test1</a>
-<a href="{{route('admin.test2')}}">test2</a>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('news.') }}">{{ __('Новости') }}</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('admin.addNews') }}">{{ __('Add News') }}</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('admin.addCategory') }}">{{ __('Add Rubric') }}</a>
+</li>
+
 

@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
 @section('title', 'Главная')
 
@@ -7,8 +7,19 @@
 @endsection
 
 @section('content')
-    <h2>Главная</h2>
-    <p>Агрегатор новостей</p>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Агрегатор новостей') }}</div>
+
+                    <div class="card-body">
+                        {{ __('Выбирайте новости по рубрикам') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 

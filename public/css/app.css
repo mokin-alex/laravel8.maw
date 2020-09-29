@@ -1,4 +1,15 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);.card-body_link {
+    color: #c04d5e;
+}
+.card-body_link:hover {
+    text-decoration: none;
+    color: #7274c4;
+}
+
+.navbar-brand {
+    color: #c04d5e;
+}
+@charset "UTF-8";
 
 /*!
  * Bootstrap v4.5.2 (https://getbootstrap.com/)
