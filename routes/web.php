@@ -17,8 +17,11 @@ use App\Http\Controllers\News\{NewsController, CategoryController};
 */
 // maw homework 3
 
-Route::get('/', [HomeController::class, 'home'])->name('home');
-Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/', [HomeController::class, 'index'])->name('index'); //обычный
+Route::get('/home', [HomeController::class, 'home'])->name('home'); //бутстрап
+//Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::view('/about', 'about')->name('about');
+Route::view('/vue', 'vue')->name('vue'); //vue тест страница
 
 Route::name('admin.')
     ->prefix('admin')
@@ -42,9 +45,10 @@ Route::name('news.')
                         Route::get('/rubric/{slug}', [CategoryController::class, 'show'])->name('show');
                     });
 
-            Route::redirect('/', '/news/rubric');
+            Route::redirect('/', '/news/rubric'); //рубрики новостей
+            // Route::get('/', [NewsController::class, 'index'])->name('index'); //все новости подряд без рубрик
             Route::get('/newsOne/{id}', [NewsController::class, 'show'])->name('newsOne');
         }
     );
 
-
+Auth::routes(); //маршрут есть, но в HomeController пока отключинен конструктор из middleware
