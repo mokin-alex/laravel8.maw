@@ -1,61 +1,52 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# GB PHP Laravel
+## Задание 3 по теме: Шаблонизатор Blade, bootstrap
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+- Ознакомиться с документацией по работе с [шаблонами в laravel](https://laravel.com/docs/8.x/blade).
+- Добавить в проект шаблоны blade и bootstrap.
+- Сделать шаблоны страниц авторизации и добавления новости (ВАЖНОЕ).
 
-## About Laravel
+ Шаблон может быть не сложным, но обязательно должен содержать в себе главный шаблон (лайаут), меню, и контент. Продумайте как удобнее сделать меню, возможно вынести меню админа в выпадающий список, помните, что после авторизации функционал админа будет закрыт для простых пользователей. В форме логина должно быть видно ваше меню основное.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ЧТО СДЕЛАНО:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- переделаны модели News и Category
+- добавлена Авторизация и компоненты Vue:
+````
+composer require laravel/ui "^3.0"
+php artisan ui vue --auth
+````
+- изменены все Контроллеры
+- изменены Маршруты (применил еще и редирект)
+- изменены все Виды на blade
+  * меню обычное отличается от меню Администратора
+  * используются шаблоны форм (но маршруты и контроллеры для POST пока не прописывал)
+  картинки тут:
+  * [/news/rubric/business](https://cloud.mail.ru/public/4m26%2FyCLi1JTz6)  
+  * [/admin/addnews](https://cloud.mail.ru/public/25GJ%2F4jVfxCJqd)
+  * [/login](https://cloud.mail.ru/public/v3wK%2FH6jKABLxS)
+- FRONTEND: добавил в качестве упражнения свой стилевой файл custom.css (он успешно применился)
+- FRONTEND:
+````  npm i && npm run dev ````
+была ошибка: 
+````
+> @ watch /home/vagrant/code/laravel8.maw
+> npm run development -- --watch
+> @ development /home/vagrant/code/laravel8.maw
+> cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js "--watch"
+sh: 1: cross-env: not found
+npm ERR! code ELIFECYCLE
+npm ERR! syscall spawn
+npm ERR! file sh
+npm ERR! errno ENOENT
+npm ERR! @ development: `cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js "--watch"`
+npm ERR! spawn ENOENT
+npm ERR!
+npm ERR! Failed at the @ development script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+````
+пришлось изменить путь до cross-env.js в явном виде в файле package.json:
+````
+    "scripts": {
+        "dev": "npm run development",
+        "development": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+````
