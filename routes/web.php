@@ -18,7 +18,7 @@ use App\Http\Controllers\News\{NewsController, CategoryController};
 // maw homework 3
 
 Route::get('/', [HomeController::class, 'index'])->name('index'); //обычный
-Route::get('/home', [HomeController::class, 'home'])->name('home'); //бутстрап
+Route::get('/home', [HomeController::class, 'home'])->name('home'); //бутстрап-тест
 //Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::view('/about', 'about')->name('about');
 Route::view('/vue', 'vue')->name('vue'); //vue тест страница

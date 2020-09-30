@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -16,6 +17,6 @@ class IndexController extends Controller
     }
 
     public function addNews() {
-        return view('admin.addNews');
+        return view('admin.addNews')->with('categories', Category::getCategories());
     }
 }

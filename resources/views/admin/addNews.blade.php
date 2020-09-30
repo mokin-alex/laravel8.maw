@@ -32,10 +32,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="text" class="col-md-4 col-form-label text-md-right">{{ __('Текст') }}</label>
+                                <label for="text" class="col-md-4 col-form-label text-md-right">{{ __('Текст новости') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="text" type="text" class="form-control @error('text') is-invalid @enderror" name="text" value="{{ old('text') }}" required autocomplete="text">
+                                    <textarea id="text" class="form-control @error('text') is-invalid @enderror" name="text" rows="5" required autocomplete="text"></textarea>
 
                                     @error('text')
                                     <span class="invalid-feedback" role="alert">
@@ -49,7 +49,10 @@
                                 <label for="isPrivate" class="col-md-4 col-form-label text-md-right">{{ __('Приватная новость') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="isPrivate" type="text" class="form-control @error('isPrivate') is-invalid @enderror" name="isPrivate" value="{{ old('isPrivate') }}" required autocomplete="isPrivate" autofocus>
+                                    <input id="isPrivate" type="radio" class="form-control form-control__line @error('isPrivate') is-invalid @enderror" name="isPrivate" value=true required autocomplete="isPrivate" autofocus>
+                                    {{ __('Да, приватная новость') }}
+                                    <input id="isPrivate" type="radio" class="form-control form-control__line @error('isPrivate') is-invalid @enderror" name="isPrivate" value=false checked required autocomplete="isPrivate" autofocus>
+                                    {{ __('Нет, открытая новость') }}
 
                                     @error('isPrivate')
                                     <span class="invalid-feedback" role="alert">
@@ -60,18 +63,22 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Рубрика') }}</label>
-
+                                <label for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Категория') }}</label>
                                 <div class="col-md-6">
-                                    <input id="category_id" type="text" class="form-control @error('category_id') is-invalid @enderror" name="category_id" value="{{ old('category_id') }}" required autocomplete="category_id" autofocus>
-
+                                    <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" required autocomplete="category_id" autofocus>
+                                        <option disabled selected>{{ __('Укажите рубрику') }}</option>
+                                        @forelse($categories as $category)
+                                            <option value="{{ __($category['id']) }}">{{ __($category['title']) }} | {{ __($category['slug']) }}</option>
+                                        @empty
+                                            <option disabled>{{ __('Укажите рубрику') }}</option>
+                                        @endforelse
+                                    </select>
                                     @error('category_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
-
                             </div>
 
                             <div class="form-group row mb-0">
