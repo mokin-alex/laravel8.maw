@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController};
-use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Admin\{IndexController,DownloadController, CrudCategoryController, CrudNewsController};
 use App\Http\Controllers\News\{NewsController, CategoryController};
 
 /*
@@ -15,7 +15,7 @@ use App\Http\Controllers\News\{NewsController, CategoryController};
 | contains the "web" middleware group. Now create something great!
 |
 */
-// maw homework 3
+// maw homework 4
 
 Route::get('/', [HomeController::class, 'index'])->name('index'); //обычный
 Route::get('/home', [HomeController::class, 'home'])->name('home'); //бутстрап-тест
@@ -28,8 +28,11 @@ Route::name('admin.')
     ->group(
         function () {
             Route::get('/', [IndexController::class, 'index'])->name('index');
-            Route::get('/addrubric', [IndexController::class, 'addCategory'])->name('addCategory');
-            Route::get('/addnews', [IndexController::class, 'addNews'])->name('addNews');
+            Route::match(['get','post'], '/addrubric', [CrudCategoryController::class, 'create'])->name('addCategory');
+            Route::match(['get','post'], '/addnews', [CrudNewsController::class, 'create'])->name('addNews');
+            Route::get('/download', [DownloadController::class, 'index'])->name('download.index');
+            Route::get('/download/news', [DownloadController::class, 'newsToJson'])->name('download.news');
+            Route::get('/download/categories', [DownloadController::class, 'categoryToJson'])->name('download.categories');
         }
     );
 

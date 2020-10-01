@@ -12,11 +12,4 @@ class IndexController extends Controller
         return view('admin.index');
     }
 
-    public function addCategory() {
-        return view('admin.addRubric');
-    }
-
-    public function addNews() {
-        return view('admin.addNews')->with('categories', Category::getCategories());
-    }
 }
