@@ -1,52 +1,40 @@
 # GB PHP Laravel
-## Задание 3 по теме: Шаблонизатор Blade, bootstrap
+## Задание 4 по теме: Запросы пользователя и класс Request. Класс Response в фреймворке Laravel. Функциональное тестирование приложения
 
-- Ознакомиться с документацией по работе с [шаблонами в laravel](https://laravel.com/docs/8.x/blade).
-- Добавить в проект шаблоны blade и bootstrap.
-- Сделать шаблоны страниц авторизации и добавления новости (ВАЖНОЕ).
+### 1. Создать форму для получения данных от пользователя. Это должна быть форма добавления новости или форма заказа на получение выгрузки данных.
+- созданы 2 формы: добавление новости и добавление новостной рубрики. 
+Можно тут же проверить: После добавления Рубрики осуществляется переход ко списку рубрик, 
+а после добавления новости - переход в новости той рубрики, куда была добавлена только, что новость. 
 
- Шаблон может быть не сложным, но обязательно должен содержать в себе главный шаблон (лайаут), меню, и контент. Продумайте как удобнее сделать меню, возможно вынести меню админа в выпадающий список, помните, что после авторизации функционал админа будет закрыт для простых пользователей. В форме логина должно быть видно ваше меню основное.
+**- вопрос-проблема:** admin\addNews.blade.php - input для isPrivate переделан на checkbox. Но, форма теперь считает, что галка должна быть обязательной!
+  если галку не ставить, то форма не будет сохраняться, будет ругаться -  нужно установить галку.
+  если убрать required, то форма не будет проверять галку, но и не будет передавать в POSTе массив с ключом "isPrivate".
+  вроде пытался все контроли отключить, но в результате запутался и починить таки не смог - оставил пока галку "обязательной" :(
+  
+- добавил форму выгрузки данных (news и category) как в json-формате, так и формате Excel. выгружаются!
+     (см. картику и файлы)
+### 2. Организуйте прием данный о новой новости и сохраните в хранилище в виде файла. Т.е. переделать источник новостей из массива в файл (хранить в json-формате).
+- сохраняются и читаются данные из storage, хранится в json
+- для Моделей News и Category используются одинаковые методы чтения/записи данны, поэтому решил использовать для них trait - DataFromToFile
+И обнаружил, что ларавел не любит кастомные трейты, команды ```` php artisan make:trait DataFromToFile ```` отсутствует!
+(пришлось сделать трейт вручную)
 
-## ЧТО СДЕЛАНО:
+**Вопрос:** это концепция такая? Баг или фича?
 
-- переделаны модели News и Category
-- добавлена Авторизация и компоненты Vue:
-````
-composer require laravel/ui "^3.0"
-php artisan ui vue --auth
-````
-- изменены все Контроллеры
-- изменены Маршруты (применил еще и редирект)
-- изменены все Виды на blade
-  * меню обычное отличается от меню Администратора
-  * используются шаблоны форм (но маршруты и контроллеры для POST пока не прописывал)
-  картинки тут:
-  * [/news/rubric/business](https://cloud.mail.ru/public/4m26%2FyCLi1JTz6)  
-  * [/admin/addnews](https://cloud.mail.ru/public/25GJ%2F4jVfxCJqd)
-  * [/login](https://cloud.mail.ru/public/v3wK%2FH6jKABLxS)
-- FRONTEND: добавил в качестве упражнения свой стилевой файл custom.css (он успешно применился)
-- FRONTEND:
-````  npm i && npm run dev ````
-была ошибка: 
-````
-> @ watch /home/vagrant/code/laravel8.maw
-> npm run development -- --watch
-> @ development /home/vagrant/code/laravel8.maw
-> cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js "--watch"
-sh: 1: cross-env: not found
-npm ERR! code ELIFECYCLE
-npm ERR! syscall spawn
-npm ERR! file sh
-npm ERR! errno ENOENT
-npm ERR! @ development: `cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js "--watch"`
-npm ERR! spawn ENOENT
-npm ERR!
-npm ERR! Failed at the @ development script.
-npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
-````
-пришлось изменить путь до cross-env.js в явном виде в файле package.json:
-````
-    "scripts": {
-        "dev": "npm run development",
-        "development": "node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-````
+### 3. Добавить тесты на созданные классы и страницы.
+
+- в тесте Feature/mawNewsTest: 
+ --  проверил экспорт в json, проверка заголовка
+ -- проверил осуществляется ли  редирект на странице
+ -- и проверил на содержимое основные страницы, тесты прошли.
+ 
+- в тесте Unit/mawModelTest :
+ -- проверил работу каждую из моделей.
+ Надо отметить, что тесты не прошли (см. картинку) ибо тест не мог найти класс \File, но я в трейте его прописал напрямую,
+ после чего тест не мог узнать путь storage_path(), где лежат данные
+ 
+ Думаю правильнее всё же использовать родной ларавелевский Storage (пока только мельком просмотрел) вместо \File,
+  а для тестов с участием Storage там даже есть такие штуки как fake() и можно использовать Mocking (кажется).
+   
+
+

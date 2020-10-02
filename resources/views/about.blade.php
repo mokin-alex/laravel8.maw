@@ -19,7 +19,7 @@
                             </div>
                         @endif
                         {{ __('Курс GB PHP Laravel') }}
-                        <p>Задание 3</p>
+                        <p>Задание 4</p>
                     </div>
                 </div>
             </div>
