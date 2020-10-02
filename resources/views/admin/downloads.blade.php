@@ -19,10 +19,16 @@
                             </div>
                         @endif
                             <h4>
-                                <a class="nav-link card-body_link" href="{{ route('admin.download.news') }}">{{ __('Download News in Json format') }}</a>
+                                <a class="nav-link card-body_link" href="{{ route('admin.download.news.json') }}">{{ __('Download News in Json format') }}</a>
                             </h4>
                             <h4>
-                                <a class="nav-link card-body_link" href="{{ route('admin.download.categories') }}">{{ __('Download Rubric in Json format') }}</a>
+                                <a class="nav-link card-body_link" href="{{ route('admin.download.categories.json') }}">{{ __('Download Rubric in Json format') }}</a>
+                            </h4>
+                            <h4>
+                                <a class="nav-link card-body_link" href="{{ route('admin.download.news.xls') }}">{{ __('Download News in Excel format') }}</a>
+                            </h4>
+                            <h4>
+                                <a class="nav-link card-body_link" href="{{ route('admin.download.categories.xls') }}">{{ __('Download Rubric in Excel format') }}</a>
                             </h4>
                     </div>
                 </div>

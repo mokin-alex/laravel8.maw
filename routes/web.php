@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController};
-use App\Http\Controllers\Admin\{IndexController,DownloadController, CrudCategoryController, CrudNewsController};
+use App\Http\Controllers\Admin\{IndexController,ExportController, CrudCategoryController, CrudNewsController};
 use App\Http\Controllers\News\{NewsController, CategoryController};
 
 /*
@@ -30,9 +30,17 @@ Route::name('admin.')
             Route::get('/', [IndexController::class, 'index'])->name('index');
             Route::match(['get','post'], '/addrubric', [CrudCategoryController::class, 'create'])->name('addCategory');
             Route::match(['get','post'], '/addnews', [CrudNewsController::class, 'create'])->name('addNews');
-            Route::get('/download', [DownloadController::class, 'index'])->name('download.index');
-            Route::get('/download/news', [DownloadController::class, 'newsToJson'])->name('download.news');
-            Route::get('/download/categories', [DownloadController::class, 'categoryToJson'])->name('download.categories');
+
+            Route::name('download.')
+                ->prefix('download')
+                ->group(
+                    function () {
+                        Route::get('/', [ExportController::class, 'index'])->name('index');
+                        Route::get('/news', [ExportController::class, 'newsToJson'])->name('news.json');
+                        Route::get('/categories', [ExportController::class, 'categoryToJson'])->name('categories.json');
+                        Route::get('/newsxls', [ExportController::class, 'newsToExcel'])->name('news.xls');
+                        Route::get('/categoriesxls', [ExportController::class, 'categoryToExcel'])->name('categories.xls');
+                    });
         }
     );
 

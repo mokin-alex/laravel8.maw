@@ -29,7 +29,7 @@
                         @if ($news)
                             @forelse($news as $item)
                                 <h4>{{ __($item['title']) }}</h4>
-                                @if (!$item['isPrivate'])
+                                @if (!$item['isPrivate']==1)
                                     <a class="card-body_link"
                                        href="{{ route('news.newsOne', $item['id']) }}">{{ __('Подробнее...') }}
                                     </a>
