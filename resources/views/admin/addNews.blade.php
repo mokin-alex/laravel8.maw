@@ -14,9 +14,9 @@
                     <div class="card-header">{{ __('Добавление новости') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.addNews') }}">
+                        <form method="POST" action="{{ route('admin.addNews') }}" enctype="multipart/form-data">
                             @csrf
-                            <input hidden id="id" type="number" name="id" value="0">
+                            <input disabled hidden id="id" type="number" name="id" value="0">
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Заголовок') }}</label>
 
@@ -51,7 +51,7 @@
                                     <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" required autocomplete="category_id" autofocus>
                                         <option disabled selected>{{ __('Укажите рубрику') }}</option>
                                         @forelse($categories as $category)
-                                            <option @if ($category['id'] == old('category_id')) selected @endif value="{{ __($category['id']) }}">{{ __($category['title']) }} | {{ __($category['slug']) }}</option>
+                                            <option disabled @if ($category['id'] == old('category_id')) selected @endif value="{{ __($category['id']) }}">{{ __($category['title']) }} | {{ __($category['slug']) }}</option>
                                         @empty
                                             <option disabled>{{ __('Укажите рубрику') }}</option>
                                         @endforelse
@@ -69,7 +69,7 @@
 
                                 <div class="col-md-8">
                                     <input @if (old('isPrivate')) checked @endif id="isPrivate" type="checkbox" class="form-control @error('isPrivate') is-invalid @enderror"
-                                           name="isPrivate" value="1"  required autocomplete="isPrivate" autofocus>
+                                           name="isPrivate" value=true  autocomplete="isPrivate" autofocus>
 
                                     @error('isPrivate')
                                     <span class="invalid-feedback" role="alert">
@@ -77,6 +77,10 @@
                                     </span>
                                     @enderror
                                 </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Добавить картинку') }}</label>
+                                <input id="image" type="file" name="image">
                             </div>
 
                             <div class="form-group row mb-0">

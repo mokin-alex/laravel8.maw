@@ -61,7 +61,7 @@ class News extends Model
         ],
     ];
 
-    private static $storageFileName = '\news.json';
+    private static $storageFileName = '/news.json';
 
     public static function getAll(){
         return static::getNews();

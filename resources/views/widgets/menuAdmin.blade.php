@@ -1,5 +1,5 @@
 <li class="nav-item {{ request()->routeIs('news.')?'active':'' }}">
-    <a class="nav-link" href="{{ route('news.') }}">{{ __('Новости') }}</a>
+    <a class="nav-link" href="{{ route('news.index') }}">{{ __('Новости') }}</a>
 </li>
 <li class="nav-item {{ request()->routeIs('admin.addNews')?'active':'' }}">
     <a class="nav-link" href="{{ route('admin.addNews') }}">{{ __('Add News') }}</a>

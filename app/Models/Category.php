@@ -34,7 +34,7 @@ class Category extends Model
         ],
     ];
 
-    private static $storageFileName = '\categories.json';
+    private static $storageFileName = '/categories.json';
 
     public static function getAll(){
         return static::getCategories();

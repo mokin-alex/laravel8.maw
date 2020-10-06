@@ -9,6 +9,7 @@ trait DataFromToFile
 
     private static function getFromFile()
     {
+        //dd(storage_path());
         if (\Illuminate\Support\Facades\File::isFile(storage_path() . static::$storageFileName)) {
             $str = \Illuminate\Support\Facades\File::get(storage_path() . static::$storageFileName);
             return json_decode($str, true, 3, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);

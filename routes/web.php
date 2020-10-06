@@ -15,7 +15,7 @@ use App\Http\Controllers\News\{NewsController, CategoryController};
 | contains the "web" middleware group. Now create something great!
 |
 */
-// maw homework 4
+// maw homework 5
 
 Route::get('/', [HomeController::class, 'index'])->name('index'); //обычный
 Route::get('/home', [HomeController::class, 'home'])->name('home'); //бутстрап-тест
@@ -56,10 +56,10 @@ Route::name('news.')
                         Route::get('/rubric/{slug}', [CategoryController::class, 'show'])->name('show');
                     });
 
-            Route::redirect('/', '/news/rubric'); //рубрики новостей
-            // Route::get('/', [NewsController::class, 'index'])->name('index'); //все новости подряд без рубрик
+            //Route::redirect('/', '/news/rubric'); //рубрики новостей
+            Route::get('/', [NewsController::class, 'index'])->name('index'); //все новости подряд без рубрик
             Route::get('/newsOne/{id}', [NewsController::class, 'show'])->name('newsOne');
         }
     );
 
-Auth::routes(); //маршрут есть, но в HomeController пока отключинен конструктор из middleware
+Auth::routes(); //маршрут есть, но в HomeController пока отключен конструктор из middleware
