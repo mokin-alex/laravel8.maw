@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades;
+use Illuminate\Support\Facades\DB;
 
 class CrudNewsController extends Controller
 {
@@ -14,19 +15,15 @@ class CrudNewsController extends Controller
 
             if ($request->isMethod('post')) {
                 $url = null;
-                $isAdded = $request->except('_token');
-                //dd($isAdded);
+                $newExemplar = $request->except('_token');
                 if ($request->file('image')){
                   $path = Facades\Storage::putFile('public', $request->file('image'));
-                  $url = url($path);
+                  $url = Facades\Storage::url($path);
                 }
-/*                if (News::setExemplar($isAdded)) {
-                    $current_category=Category::getCategoryById($isAdded['category_id']);
-                    return redirect()->route('news.category.show', $current_category['slug']);
-                } else {
-                    $request->flash();
-                    return redirect()->route('admin.addNews');
-                }*/
+                $newExemplar['image'] = $url;
+                //dd($newExemplar);
+                $id=DB::table('news')->insertGetId($newExemplar);
+                return redirect()->route('news.newsOne', $id)->with('success', 'Новость добавлена!');
             }
 
             return view('admin.addNews')->with('categories', Category::getCategories());

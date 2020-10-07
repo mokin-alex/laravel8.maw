@@ -59,6 +59,7 @@ Route::name('news.')
             //Route::redirect('/', '/news/rubric'); //рубрики новостей
             Route::get('/', [NewsController::class, 'index'])->name('index'); //все новости подряд без рубрик
             Route::get('/newsOne/{id}', [NewsController::class, 'show'])->name('newsOne');
+            Route::post('/search', [NewsController::class, 'search'])->name('search'); //поиск по новостям.
         }
     );
 

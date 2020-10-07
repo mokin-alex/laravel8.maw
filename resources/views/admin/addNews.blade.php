@@ -67,7 +67,7 @@
                             <div class="form-group row">
                                 <label for="isPrivate" class="col-md-4 col-form-label text-md-right">{{ __('Приватная новость') }}</label>
 
-                                <div class="col-md-8">
+                                <div class="col-md-8 form-check">
                                     <input @if (old('isPrivate')) checked @endif id="isPrivate" type="checkbox" class="form-control @error('isPrivate') is-invalid @enderror"
                                            name="isPrivate" value=true  autocomplete="isPrivate" autofocus>
 
