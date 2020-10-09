@@ -12,7 +12,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                        <div class="card-header">{{ __('Полный список новостей')  }}</div>
+                    <div class="card-header">{{ __('Полный список новостей')  }}</div>
                     <div class="card-body">
                         @if (session('status'))
                             <div class="alert alert-success" role="alert">
@@ -34,9 +34,11 @@
                             @empty
                                 {{ __('Нет новостей!') }}
                             @endforelse
+
                         @else
                             {{ __('Нет новостей') }}
                         @endif
+                        {{--                    {{ $news->links() }}--}}
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@ class CategoryController extends Controller
     //
     public function index() {
         return view('news.categories', [
-            'categories' => Category::getCategories()
+            'categories' => Category::all()
         ]);
     }
 
