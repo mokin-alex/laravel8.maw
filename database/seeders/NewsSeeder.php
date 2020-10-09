@@ -26,7 +26,8 @@ class NewsSeeder extends Seeder
             $data[] = [
                 'title' => $faker->realText(50),
                 'text' => $faker->realText(500),
-                'isPrivate' =>$faker->boolean(20),
+                'isPrivate' => $faker->boolean(20),
+                'category_id' => random_int(1,4), //$faker->randomNumber(random_int(1, 4)),
                 'created_at' => now(),
             ];
         }
