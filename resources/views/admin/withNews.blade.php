@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Administer | Add News')
+{{--ЭТО ВЬЮШКА НЕ ДОДЕЛАНА!!! работа доделана только для КАТЕГОРИЙ (рубрик)--}}
+
+@if($news->id)
+    @section('title', 'Administer | Update News')
+@else
+    @section('title', 'Administer | Add News')
+@endif
 
 @section('menu')
     @include('widgets.menuAdmin')
@@ -14,8 +20,12 @@
                     <div class="card-header">{{ __('Добавление новости') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.addNews') }}" enctype="multipart/form-data">
+                        <form method="POST" action="@if ($news->id){{  route('admin.news.update', $news) }} @else {{ route('admin.news.store') }}@endif" enctype="multipart/form-data">
                             @csrf
+                            @if($news->id)
+                                @method('PUT')
+                            @endif
+
                             <input disabled hidden id="id" type="number" name="id" value="0">
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Заголовок') }}</label>

@@ -19,7 +19,6 @@ use App\Http\Controllers\News\{NewsController, CategoryController};
 
 Route::get('/', [HomeController::class, 'index'])->name('index'); //обычный
 Route::get('/home', [HomeController::class, 'home'])->name('home'); //бутстрап-тест
-//Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::view('/about', 'about')->name('about');
 Route::view('/vue', 'vue')->name('vue'); //vue тест страница
 
@@ -28,8 +27,6 @@ Route::name('admin.')
     ->group(
         function () {
             Route::get('/', [IndexController::class, 'index'])->name('index');
-            Route::match(['get','post'], '/addrubric', [CrudCategoryController::class, 'create'])->name('addCategory');
-            Route::match(['get','post'], '/addnews', [CrudNewsController::class, 'create'])->name('addNews');
 
             Route::name('download.')
                 ->prefix('download')
@@ -41,6 +38,9 @@ Route::name('admin.')
                         Route::get('/newsxls', [ExportController::class, 'newsToExcel'])->name('news.xls');
                         Route::get('/categoriesxls', [ExportController::class, 'categoryToExcel'])->name('categories.xls');
                     });
+
+            Route::resource('category', CrudCategoryController::class);
+            Route::resource('news', CrudNewsController::class);
         }
     );
 

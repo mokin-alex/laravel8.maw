@@ -18,7 +18,13 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        {{ __('Добавьте новость или новостную рубрику!') }}
+                        {{ __('Добавьте новость или новостную рубрику! Либо отредактируйте имеющиеся.') }}
+                            <li class="nav-item {{ request()->routeIs('admin.news.index')?'active':'' }}">
+                                <a class="card-body_link" href="{{ route('admin.news.index') }}">{{ __('Изменение новостей') }}</a>
+                            </li>
+                            <li class="nav-item {{ request()->routeIs('admin.category.index')?'active':'' }}">
+                                <a class="card-body_link" href="{{ route('admin.category.index') }}">{{ __('Изменение рубрик') }}</a>
+                            </li>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class CrudNewsController extends Controller
@@ -14,7 +15,7 @@ class CrudNewsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.crudNews')->with('news', News::query()->paginate(5));
     }
 
     /**
@@ -52,12 +53,12 @@ class CrudNewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  News $news
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(News $news)
     {
-        //
+        return view('admin.withNews')->with('news', $news);
     }
 
     /**
@@ -75,11 +76,12 @@ class CrudNewsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  News $news
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(News $news)
     {
-        //
+        $news->delete();
+        return redirect()->route('admin.news.index')->with('success', 'Новость успешно удалена');
     }
 }
