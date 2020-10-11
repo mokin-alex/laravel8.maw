@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
 
@@ -58,7 +59,7 @@ class CrudNewsController extends Controller
      */
     public function edit(News $news)
     {
-        return view('admin.withNews')->with('news', $news);
+        return view('admin.withNews')->with('news', $news)->with('categories', Category::all());
     }
 
     /**

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @if ($category)
-    @section('title', $category)
+    @section('title', $category->title)
 @else
     @section('title', 'Рубрика')
 @endif
@@ -16,9 +16,9 @@
             <div class="col-md-8">
                 <div class="card">
                     @if ($category)
-                        <div class="card-header">{{ __($category)  }}</div>
+                        <div class="card-header">{{ __($category->title)  }}</div>
                     @else
-                        <div class="card-header">{{ __('Рубрика отсутсвует!')  }}</div>
+                        <div class="card-header">{{ __('Рубрика отсутствует!')  }}</div>
                     @endif
                     <div class="card-body">
                         @if (session('status'))
@@ -28,10 +28,10 @@
                         @endif
                         @if ($news)
                             @forelse($news as $item)
-                                <h4>{{ __($item['title']) }}</h4>
-                                @if (!$item['isPrivate']==1)
+                                <h4>{{ __($item->title) }}</h4>
+                                @if (!$item->isPrivate==1)
                                     <a class="card-body_link"
-                                       href="{{ route('news.newsOne', $item['id']) }}">{{ __('Подробнее...') }}
+                                       href="{{ route('news.newsOne', $item->id) }}">{{ __('Подробнее...') }}
                                     </a>
                                 @else
                                     <a class="card-body_link"

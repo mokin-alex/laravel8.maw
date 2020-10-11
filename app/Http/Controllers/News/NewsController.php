@@ -22,12 +22,10 @@ class NewsController extends Controller
 
     public function search(Request $request)
     {
-        if ($request->isMethod('post')) {
             $search = $request->get('search');
             $news = News::query()->where('text', 'like', '%' . $search . '%')
                 ->orWhere('title', 'like', '%' . $search . '%')->get();//->paginate(10);
-            return view('news.newsAll')->with('news', $news)->with('success', $search);
-        }
+            return view('news.newsAll')->with('news', $news)->with('success', 'Результат поиска по фразе: '. $search);
     }
 
 }

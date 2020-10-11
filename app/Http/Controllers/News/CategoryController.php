@@ -9,16 +9,24 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     //
-    public function index() {
+    public function index()
+    {
         return view('news.categories', [
             'categories' => Category::all()
         ]);
     }
 
-    public function show($slug) {
+    public function show($slug)
+    {
+        $category = Category::query()->where('slug', '=', $slug)->first();
+        if ($category) {
+            $news = $category->news()->get();
+        } else {
+            $news = null;
+        }
         return view('news.byCategory', [
-            'news' => News::getNewsByCategorySlug($slug),
-            'category' => Category::getCategoryNameBySlug($slug)
+            'news' => $news,
+            'category' => $category,
         ]);
     }
 }
