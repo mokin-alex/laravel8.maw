@@ -111,7 +111,7 @@
                                     <input @if ($news->isPrivate == 1 || old('isPrivate') == 1) checked
                                            @endif id="isPrivate" type="checkbox"
                                            class="form-control @error('isPrivate') is-invalid @enderror"
-                                           name="isPrivate" value=true autocomplete="isPrivate" autofocus>
+                                           name="isPrivate" value=1 autocomplete="isPrivate" autofocus>
 
                                     @error('isPrivate')
                                     <span class="invalid-feedback" role="alert">

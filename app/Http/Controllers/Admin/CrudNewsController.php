@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades;
 
 class CrudNewsController extends Controller
 {
@@ -16,7 +17,7 @@ class CrudNewsController extends Controller
      */
     public function index()
     {
-        return view('admin.crudNews')->with('news', News::query()->paginate(5));
+        return view('admin.crudNews')->with('news', News::query()->orderByDesc('id')->paginate(5));
     }
 
     /**
@@ -26,7 +27,7 @@ class CrudNewsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.withNews')->with('news', new News())->with('categories', Category::all());
     }
 
     /**
@@ -37,18 +38,30 @@ class CrudNewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $url = null;
+        //$this->validate($request, News::rules(), [], News::attributeNames());
+
+        if ($request->file('image')){
+            $path = Facades\Storage::putFile('public', $request->file('image'));
+            $url = Facades\Storage::url($path);
+        }
+
+        $news = new News();
+        $news->fill($request->except('_token'));
+        $news->image = $url;
+        $news->save();
+        return redirect()->route('admin.news.show', $news)->with('success', 'Новость добавлена!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  News $news
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(News $news)
     {
-        //
+        return view('news.one')->with('news', $news);
     }
 
     /**
@@ -66,12 +79,26 @@ class CrudNewsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  News $news
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, News $news)
     {
-        //
+        $url = $news->image; //сохраним старое значение фото
+
+        //TODO ВАЛИДАЦИЯ!
+        //$this->validate($request, News::rules(), [], News::attributeNames());
+
+        if ($request->file('image')){ //если было добавлено новое фото
+            $path = Facades\Storage::putFile('public', $request->file('image'));
+            $url = Facades\Storage::url($path);
+        }
+
+        $news->fill($request->except('_token')); //заполним поля из запроса
+        $news->isPrivate = ($request->isPrivate) ?? 0; //если в запросе стала неприватной новость - сбросим в false
+        $news->image = $url;
+        $news->save();
+        return redirect()->route('admin.news.show', $news)->with('success', 'Новость изменена!');
     }
 
     /**
