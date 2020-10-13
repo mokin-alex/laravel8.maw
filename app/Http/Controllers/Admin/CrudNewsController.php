@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreNews;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
@@ -33,11 +34,12 @@ class CrudNewsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreNews  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreNews $request)
     {
+        $validated = $request->validated();
         $url = null;
         //$this->validate($request, News::rules(), [], News::attributeNames());
 
@@ -78,16 +80,16 @@ class CrudNewsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreNews  $request
      * @param  News $news
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news)
+    public function update(StoreNews $request, News $news)
     {
-        $url = $news->image; //сохраним старое значение фото
+        //ВАЛИДАЦИЯ! см. Http\Requests\StoreNews
+        $validated = $request->validated();
 
-        //TODO ВАЛИДАЦИЯ!
-        //$this->validate($request, News::rules(), [], News::attributeNames());
+        $url = $news->image; //сохраним старое значение фото
 
         if ($request->file('image')){ //если было добавлено новое фото
             $path = Facades\Storage::putFile('public', $request->file('image'));

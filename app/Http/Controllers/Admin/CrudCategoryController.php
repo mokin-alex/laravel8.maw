@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategory;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -27,15 +28,17 @@ class CrudCategoryController extends Controller
     {
         return view('admin.withRubric')->with('category', new Category());
     }
-
+//* @param  \Illuminate\Http\Request  $request
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param StoreCategory $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategory $request)
     {
+        // Retrieve the validated input data...
+        $validated = $request->validated();
         $category= new Category();
         $category->fill($request->all())->save();
         return redirect()->route('admin.category.index')->with('success', 'Рубрика добавлена успешно!');
@@ -68,11 +71,12 @@ class CrudCategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  Category  $category
+     * @param StoreCategory $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(StoreCategory $request, Category $category)
     {
+        $validated = $request->validated();
         $category->fill($request->all())->save();
         return redirect()->route('admin.category.index')->with('success', 'Рубрика обновлена успешно!');
     }

@@ -38,8 +38,8 @@
 
                                 <div class="col-md-8">
                                     <input id="title" type="text"
-                                           class="form-control @error('name') is-invalid @enderror" name="title"
-                                           value=" {{ old('title') ?? $news->title}} " required autocomplete="title"
+                                           class="form-control @error('title') is-invalid @enderror" name="title"
+                                           value=" {{ old('title') ?? $news->title}} " autocomplete="title"
                                            autofocus>
 
                                     @error('title')
@@ -56,7 +56,7 @@
 
                                 <div class="col-md-8">
                                     <textarea id="text" class="form-control @error('text') is-invalid @enderror"
-                                              name="text" rows="5" required
+                                              name="text" rows="5"
                                               autocomplete="text">{{ old('text') ?? $news->text}}</textarea>
 
                                     @error('text')
@@ -71,18 +71,16 @@
                                 <label for="category_id"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Рубрика') }}</label>
                                 <div class="col-md-8">
-                                    {{--                       <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" required autocomplete="category_id" autofocus>
-                                                               <option disabled selected>{{ __('Укажите рубрику') }}</option>
-                                                               @forelse($categories as $category)
-                                                                   <option disabled @if ($category['id'] == old('category_id')) selected @endif value="{{ __($category['id']) }}">{{ __($category['title']) }} | {{ __($category['slug']) }}</option>
-                                                               @empty
-                                                                   <option disabled>{{ __('Укажите рубрику') }}</option>
-                                                               @endforelse
-                                                           </select>--}}
-                                    <select name="category_id" id="newsCategory" class="form-control">
-                                        <option disabled selected>{{ __('Укажите рубрику') }}</option>
-                                        @forelse($categories as $item)
+                                    <select name="category_id" id="category_id"
+                                            class="form-control @error('category_id') is-invalid @enderror">
 
+                                        @if($news->id)
+                                            <option disabled>{{ __('Укажите рубрику') }}</option>
+                                        @else
+                                            <option disabled selected>{{ __('Укажите рубрику') }}</option>
+                                        @endif
+
+                                        @forelse($categories as $item)
                                             @if (old('category_id'))
                                                 <option @if ($item->id == old('category_id')) selected
                                                         @endif value="{{ $item->id }}">{{ __($item->title .' | '. $item->slug) }}</option>
@@ -110,7 +108,7 @@
                                 <div class="col-md-8 form-check">
                                     <input @if ($news->isPrivate == 1 || old('isPrivate') == 1) checked
                                            @endif id="isPrivate" type="checkbox"
-                                           class="form-control @error('isPrivate') is-invalid @enderror"
+                                           class="form-control form-check-input @error('isPrivate') is-invalid @enderror"
                                            name="isPrivate" value=1 autocomplete="isPrivate" autofocus>
 
                                     @error('isPrivate')
@@ -120,12 +118,16 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row @error('image') is-invalid @enderror">
                                 <label for="image"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Добавить картинку') }}</label>
-                                <input id="image" type="file" name="image">
+                                    <input id="image" type="file" name="image" class="btn btn-light">
                             </div>
-
+                            @error('image')
+                            <span class="invalid-feedback offset-md-4" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

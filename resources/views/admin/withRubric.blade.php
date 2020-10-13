@@ -29,12 +29,12 @@
                             <input hidden id="id" type="number" name="id" value="0">
                             <div class="form-group row">
                                 <label for="title"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Наименование') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Наименование рубрики') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="title" type="text"
                                            class="form-control @error('title') is-invalid @enderror" name="title"
-                                           value="{{ old('title') ?? $category->title }}" required autocomplete="title"
+                                           value="{{ old('title') ?? $category->title }}" autocomplete="title"
                                            autofocus>
 
                                     @error('title')
@@ -51,7 +51,7 @@
                                 <div class="col-md-6">
                                     <input id="slug" type="text"
                                            class="form-control @error('slug') is-invalid @enderror" name="slug"
-                                           value="{{ old('slug') ?? $category->slug }}" required autocomplete="slug">
+                                           value="{{ old('slug') ?? $category->slug }}"  autocomplete="slug">
 
                                     @error('slug')
                                     <span class="invalid-feedback" role="alert">
