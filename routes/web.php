@@ -15,7 +15,7 @@ use App\Http\Controllers\News\{NewsController, CategoryController};
 | contains the "web" middleware group. Now create something great!
 |
 */
-// maw homework 6
+// maw homework 7
 
 Route::get('/', [HomeController::class, 'index'])->name('index'); //обычный
 Route::get('/home', [HomeController::class, 'home'])->name('home'); //бутстрап-тест
