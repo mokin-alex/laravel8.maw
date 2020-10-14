@@ -1,0 +1,32 @@
+{
+    "1": {
+        "id": 1,
+        "slug": "auto",
+        "title": "Авто"
+    },
+    "2": {
+        "id": 2,
+        "slug": "business",
+        "title": "Экономика"
+    },
+    "3": {
+        "id": 3,
+        "slug": "politics",
+        "title": "Политика"
+    },
+    "4": {
+        "id": 4,
+        "slug": "sport",
+        "title": "Спорт"
+    },
+    "5": {
+        "id": 5,
+        "title": "Культура",
+        "slug": "culture"
+    },
+    "6": {
+        "id": 6,
+        "title": "Технологии",
+        "slug": "computers"
+    }
+}
