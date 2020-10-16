@@ -24,8 +24,8 @@ class StoreNews extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string',
-            'text' => 'required|string',
+            'title' => 'required|string|min:10|max:255',
+            'text' => 'required|string|min:10',
             'isPrivate' => 'boolean',
             'image' => 'nullable|image',
             'category_id' => 'required|exists:App\Models\Category,id',

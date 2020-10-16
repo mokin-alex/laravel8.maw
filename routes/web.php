@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{HomeController};
+use App\Http\Controllers\{HomeController, ProfileController};
 use App\Http\Controllers\Admin\{IndexController,ExportController, CrudCategoryController, CrudNewsController};
 use App\Http\Controllers\News\{NewsController, CategoryController};
 
@@ -15,15 +15,16 @@ use App\Http\Controllers\News\{NewsController, CategoryController};
 | contains the "web" middleware group. Now create something great!
 |
 */
-// maw homework 7
+// maw homework 8
 
 Route::get('/', [HomeController::class, 'index'])->name('index'); //обычный
-Route::get('/home', [HomeController::class, 'home'])->name('home'); //бутстрап-тест
+Route::get('/home', [HomeController::class, 'index'])->name('home'); //бутстрап-тест
 Route::view('/about', 'about')->name('about');
 Route::view('/vue', 'vue')->name('vue'); //vue тест страница
 
 Route::name('admin.')
     ->prefix('admin')
+    ->middleware(['auth', 'is_admin'])
     ->group(
         function () {
             Route::get('/', [IndexController::class, 'index'])->name('index');
@@ -64,3 +65,6 @@ Route::name('news.')
     );
 
 Auth::routes(); //маршрут есть, но в HomeController пока отключен конструктор из middleware
+
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');

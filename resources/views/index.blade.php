@@ -13,8 +13,14 @@
                 <div class="card">
                     <div class="card-header">{{ __('Агрегатор новостей') }}</div>
 
-                    <div class="card-body">
+                    <div class="card-body ">
                         {{ __('Выбирайте новости по рубрикам') }}
+
+                            @foreach($errors->all() as $error)
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ $error }}</strong>
+                            </div>
+                            @endforeach
                     </div>
                 </div>
             </div>
