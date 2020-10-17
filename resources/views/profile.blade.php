@@ -14,6 +14,13 @@
                     <div class="card-header">{{ __('Профиль') }}</div>
 
                     <div class="card-body">
+                        <div class="col-md-6">
+                            @if ($user->is_admin)
+                                <p>Статус: Администратор</p>
+                            @else
+                                <p>Статус: Пользователь</p>
+                            @endif
+                        </div>
                         <form method="POST" action="{{ route('profile.update') }}">
                             @csrf
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CrudUserController extends Controller
@@ -14,7 +15,7 @@ class CrudUserController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.crudUser')->with('users', User::query()->orderByDesc('id')->paginate(5));
     }
 
     /**
@@ -52,12 +53,12 @@ class CrudUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('profile')->with('user', $user);
     }
 
     /**
@@ -75,11 +76,12 @@ class CrudUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('admin.user.index')->with('success', 'Профиль успешно удален!');
     }
 }

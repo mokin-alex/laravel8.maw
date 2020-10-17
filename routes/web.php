@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, ProfileController};
-use App\Http\Controllers\Admin\{IndexController,ExportController, CrudCategoryController, CrudNewsController};
+use App\Http\Controllers\Admin\{IndexController,ExportController, CrudCategoryController, CrudNewsController, CrudUserController};
 use App\Http\Controllers\News\{NewsController, CategoryController};
 
 /*
@@ -42,6 +42,7 @@ Route::name('admin.')
 
             Route::resource('category', CrudCategoryController::class);
             Route::resource('news', CrudNewsController::class);
+            Route::resource('user', CrudUserController::class);
         }
     );
 
