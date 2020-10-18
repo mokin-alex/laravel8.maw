@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Hash;
 
-class StoreProfile extends FormRequest
+class StoreUser extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,11 +13,11 @@ class StoreProfile extends FormRequest
      */
     public function authorize()
     {
-        //можно проверить авторизацию и тут:
-/*        if (Hash::check($this->post('password_current'), $this->user()->password)) {
+        if ($this->user()->is_admin) { // проверим юзера который отправляет запрос на статус админа
             return true;
-        }*/
-        return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -30,8 +29,9 @@ class StoreProfile extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$this->user()->id], //id текущего юзера
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $this->id], //id из формы
             'password' => ['required', 'string', 'min:3', 'confirmed'],
+            'is_admin' => ['nullable', 'boolean'],
         ];
     }
 }

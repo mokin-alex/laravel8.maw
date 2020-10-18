@@ -11,7 +11,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Профиль') }}</div>
+                    <div class="card-header">{{ __('Редактируемый профиль') }}</div>
 
                     <div class="card-body">
                         <div class="col-md-6">
@@ -24,6 +24,14 @@
                         <form method="POST" action="{{ route('admin.user.update', $user) }}">
                             @csrf
                             @method('PUT')
+                            <div class="form-group row">
+                                <label for="id"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('ID пользователя: '. $user->id ) }}</label>
+                                <div class="col-md-6">
+                                    <input id="id" type="number" name="id" hidden class="form-control" value="{{ $user->id }}">
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <label for="name"
                                        class="col-md-4 col-form-label text-md-right">{{ __('Имя пользователя') }}</label>
@@ -59,14 +67,16 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password-current"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Текущий пароль') }}</label>
+                                <label for="is_admin"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Статус администратора') }}</label>
 
-                                <div class="col-md-6">
-                                    <input id="password-current" type="password"
-                                           class="form-control @error('password_current') is-invalid @enderror"
-                                           name="password_current">
-                                    @error('password_current')
+                                <div class="col-md-8 form-check">
+                                    <input @if ($user->is_admin == 1 || old('is_admin') == 1) checked
+                                           @endif id="is_admin" type="checkbox"
+                                           class="form-control form-check-input @error('is_admin') is-invalid @enderror"
+                                           name="is_admin" value=1 autocomplete="is_admin" autofocus>
+
+                                    @error('is_admin')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

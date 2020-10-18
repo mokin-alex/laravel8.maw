@@ -41,6 +41,14 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
                 'is_admin' => false,
             ],
+            [
+                'name' => 'user3',
+                'email' => 'user3@user3.ru',
+                'email_verified_at' => now(),
+                'password' => Hash::make('123'), // password
+                'remember_token' => Str::random(10),
+                'is_admin' => false,
+            ],
         ];
         DB::table('users')->insert($users);
     }
