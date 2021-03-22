@@ -10,6 +10,9 @@
 <li class="nav-item {{ request()->routeIs('admin.download.index')?'active':'' }}">
     <a class="nav-link" href="{{ route('admin.download.index') }}">{{ __('Downloads') }}</a>
 </li>
+<li class="nav-item {{ request()->routeIs('admin.parser')?'active':'' }}">
+    <a class="nav-link" href="{{ route('admin.parser') }}">{{ __('Parser') }}</a>
+</li>
 
 
 

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, ProfileController};
-use App\Http\Controllers\Admin\{IndexController,ExportController, CrudCategoryController, CrudNewsController, CrudUserController};
+use App\Http\Controllers\Admin\{IndexController,ExportController, CrudCategoryController, CrudNewsController, CrudUserController, ParserController};
 use App\Http\Controllers\News\{NewsController, CategoryController};
 
 /*
@@ -44,6 +44,7 @@ Route::name('admin.')
             Route::resource('news', CrudNewsController::class);
             Route::resource('user', CrudUserController::class);
             Route::get('/user/toggle/{user}', [CrudUserController::class, 'changeStatus'])->name('user.status');
+            Route::get('parser', [ParserController::class, 'index'])->name('parser');
         }
     );
 
