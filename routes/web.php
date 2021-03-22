@@ -43,7 +43,7 @@ Route::name('admin.')
             Route::resource('category', CrudCategoryController::class);
             Route::resource('news', CrudNewsController::class);
             Route::resource('user', CrudUserController::class);
-            Route::post('/user/toggle', [CrudUserController::class, 'changeStatus'])->name('user.status');
+            Route::get('/user/toggle/{user}', [CrudUserController::class, 'changeStatus'])->name('user.status');
         }
     );
 

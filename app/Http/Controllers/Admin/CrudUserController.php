@@ -20,7 +20,9 @@ class CrudUserController extends Controller
      */
     public function index()
     {
+        //$users = User::query()->where('id', '!=', Auth::id())->get();
         return view('admin.crudUser')->with('users', User::query()->orderByDesc('id')->paginate(5));
+        //return view('admin.crudUser')->with('users',$users->get()->paginate(5));
     }
 
     /**
@@ -105,9 +107,12 @@ class CrudUserController extends Controller
         $user->delete();
         return redirect()->route('admin.user.index')->with('success', 'Профиль успешно удален!');
     }
-
-    public function changeStatus(Request $request)
+//
+    // @param User $user
+    public function changeStatus(User $user)
+    //public function changeStatus(Request $request)
     {
+        /**
         $aaa = $request->all();
         //$aaa = [1=>'aaa'];
         \Log::info($aaa);
@@ -116,6 +121,13 @@ class CrudUserController extends Controller
             'success' => 'Есть ответ:',
             'text' => 'приходит ответ',
         ]);
+*/
+        if ($user->id != Auth::id()) {
+            $user->is_admin = !$user->is_admin;
+            $user->save();
+            return redirect()->route('admin.user.index')->with('success', 'Права изменены');
+        }
+        return redirect()->route('admin.user.index')->with('success', 'Нельзя снять админа с себя.');
 
     }
 
