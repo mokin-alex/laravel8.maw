@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, ProfileController};
 use App\Http\Controllers\Admin\{IndexController,ExportController, CrudCategoryController, CrudNewsController, CrudUserController, ParserController};
 use App\Http\Controllers\News\{NewsController, CategoryController};
-
+use \App\Http\Controllers\{LoginController};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +21,10 @@ Route::get('/', [HomeController::class, 'index'])->name('index'); //обычны
 Route::get('/home', [HomeController::class, 'index'])->name('home'); //бутстрап-тест
 Route::view('/about', 'about')->name('about');
 Route::view('/vue', 'vue')->name('vue'); //vue тест страница
+Route::get('/auth/vk', [LoginController::class, 'loginVK'])->name('vklogin');
+Route::get('/auth/vk/response', [LoginController::class, 'responseVK'])->name('vkResponse');
+Route::get('/auth/github', [LoginController::class, 'loginGitHub'])->name('githublogin');
+Route::get('/auth/github/response', [LoginController::class, 'responseGitHub'])->name('githubResponse');
 
 Route::name('admin.')
     ->prefix('admin')
