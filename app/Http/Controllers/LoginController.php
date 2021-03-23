@@ -15,7 +15,7 @@ class LoginController extends Controller
             return redirect()->route('home');
         }
 
-        return Socialite::with('vkontakte')->redirect();
+        return Socialite::driver('vkontakte')->redirect();
     }
 
     public function responseVK(UserRepository $userRepository) {
