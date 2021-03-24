@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-       // АВТОРИЗАЦИЯ ПОКА ОТКЛЮЧЕНА ЗДЕСЬ:
+       //
        $this->middleware('auth');
     }
 

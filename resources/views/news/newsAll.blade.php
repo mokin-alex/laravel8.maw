@@ -38,7 +38,7 @@
                         @else
                             {{ __('Нет новостей') }}
                         @endif
-                        {{--                    {{ $news->links() }}--}}
+                        {{ $news->links() }}
                     </div>
                 </div>
             </div>

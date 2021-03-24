@@ -15,7 +15,7 @@ use \App\Http\Controllers\{LoginController};
 | contains the "web" middleware group. Now create something great!
 |
 */
-// maw homework 8
+// maw homework 9
 
 Route::get('/', [HomeController::class, 'index'])->name('index'); //обычный
 Route::get('/home', [HomeController::class, 'index'])->name('home'); //бутстрап-тест
