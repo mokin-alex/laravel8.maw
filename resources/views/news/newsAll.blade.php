@@ -19,6 +19,9 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        <div class="alert alert-success" role="alert">
+                            {{ $message ?? '' }}
+                        </div>
                         @if ($news)
                             @forelse($news as $item)
                                 <h4>{{ __($item->title) }}</h4>

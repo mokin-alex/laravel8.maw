@@ -24,8 +24,9 @@ class NewsController extends Controller
     {
             $search = $request->get('search');
             $news = News::query()->where('text', 'like', '%' . $search . '%')
-                ->orWhere('title', 'like', '%' . $search . '%')->get();//->paginate(10);
-            return view('news.newsAll')->with('news', $news)->with('success', 'Результат поиска по фразе: '. $search);
+                ->orWhere('title', 'like', '%' . $search . '%')->paginate(10);
+            //dd($news);
+            return view('news.newsAll')->with('news', $news)->with('message', 'Результат поиска по фразе: '. $search);
     }
 
 }
